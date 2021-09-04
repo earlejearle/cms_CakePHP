@@ -3,6 +3,8 @@
 
 namespace App\Controller;
 
+use Cake\Event\EventInterface;
+
 class ArticlesController extends AppController
 {
     public function index()
@@ -101,5 +103,13 @@ class ArticlesController extends AppController
             'articles' => $articles,
             'tags' => $tags
             ]);
+    }
+
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        // Configure the login action to not require authentication,
+        // preventing the infinite redirect loop issue
+        $this->Authentication->addUnauthenticatedActions(['index', 'view']);
     }
 }

@@ -54,12 +54,4 @@ class AppController extends Controller
          */
         //$this->loadComponent('FormProtection');
     }
-
-    public function beforeFilter(EventInterface $event)
-    {
-        parent::beforeFilter($event);
-        // for all controllers in our application, make index and view
-        // actions public, slipping the authentication check
-        $this->Authentication->addUnauthenticatedActions(['index', 'view']);
-    }
 }
